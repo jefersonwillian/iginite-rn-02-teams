@@ -5,10 +5,15 @@ import { useState } from 'react';
 import { FlatList } from 'react-native';
 import Styles from './styles';
 import { ListEmpty } from '@components/ListEmpty';
+import { Button } from '@components/Button';
 
 export function Groups() {
     const [groups, setGroups] = useState<string[]>([]);
     
+    function handleNewGroup() {
+        // navigation.navigate('new');
+    }
+
     return (
         <Styles.Container>
             <Header />
@@ -27,6 +32,11 @@ export function Groups() {
                 ListEmptyComponent={() => (
                     <ListEmpty message="Que tal cadastrar a primeira turma?" />
                 )}
+            />
+
+            <Button
+                title='Criar nova turma'
+                onPress={handleNewGroup}
             />
         </Styles.Container>
     );

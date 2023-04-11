@@ -1,4 +1,4 @@
-import { Container, Message } from "./styles";
+import Styles from "./styles";
 
 type Props = {
     message: string;
@@ -6,8 +6,8 @@ type Props = {
 
 export function ListEmpty({ message }: Props) {
     return (
-        <Container>
-            <Message>{message}</Message>
-        </Container>
+        <Styles.Container>
+            <Styles.Message>{message}</Styles.Message>
+        </Styles.Container>
     )
 }
