@@ -4,9 +4,10 @@ import { Highlight } from '@components/Highlight';
 import { useState } from 'react';
 import { FlatList } from 'react-native';
 import Styles from './styles';
+import { ListEmpty } from '@components/ListEmpty';
 
 export function Groups() {
-    const [groups, setGroups] = useState<string[]>(['Turma 1', 'Turma 2', 'Turma 3']);
+    const [groups, setGroups] = useState<string[]>([]);
     
     return (
         <Styles.Container>
@@ -21,6 +22,10 @@ export function Groups() {
                 keyExtractor={item => item}
                 renderItem={({ item }) => (
                     <GroupCard title={item} />
+                )}
+                contentContainerStyle={!groups.length && { flex: 1 }}
+                ListEmptyComponent={() => (
+                    <ListEmpty message="Que tal cadastrar a primeira turma?" />
                 )}
             />
         </Styles.Container>
