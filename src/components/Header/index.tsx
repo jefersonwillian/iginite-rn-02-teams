@@ -1,4 +1,4 @@
- import { useNavigation } from "@react-navigation/native";import logoImg from '@assets/logo.png';
+import { useNavigation } from "@react-navigation/native"; import logoImg from '@assets/logo.png';
 import Styles from "./styles";
 
 type Props = {

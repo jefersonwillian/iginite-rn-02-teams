@@ -1,11 +1,11 @@
 import { useState } from "react";
-// import { useNavigation } from "@react-navigation/native";
+import { useNavigation } from "@react-navigation/native";
 import { Alert } from "react-native";
 
 // import { AppError } from "@utils/AppError";
 // import { groupCreate } from "@storage/group/groupCreate";
 
-import { Container, Content, Icon } from "./styles";
+import Styles from "./styles";
 
 import { Header } from "@components/Header";
 import { Button } from "@components/Button";
@@ -15,15 +15,18 @@ import { Input } from "@components/Input";
 export function NewGroup() {
     const [group, setGroup] = useState('');
 
-    // const navigation = useNavigation();
+    const navigation = useNavigation();
 
+    function handleNew() {
+        navigation.navigate('players', {group: 'Teste'})
+    }
 
     return (
-        <Container>
+        <Styles.Container>
             <Header showBackButton />
 
-            <Content>
-                <Icon />
+            <Styles.Content>
+                <Styles.Icon />
 
                 <Highlight
                     title="Nova turma"
@@ -38,9 +41,9 @@ export function NewGroup() {
                 <Button
                     title="Criar"
                     style={{ marginTop: 20 }}
-                    onPress={() => {}}
+                    onPress={handleNew}
                 />
-            </Content>
-        </Container>
+            </Styles.Content>
+        </Styles.Container>
     )
 }
