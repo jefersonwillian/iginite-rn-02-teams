@@ -1,12 +1,13 @@
 import { GroupCard } from '@components/GroupCard';
 import { Header } from '@components/Header';
 import { Highlight } from '@components/Highlight';
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import { FlatList } from 'react-native';
 import Styles from './styles';
 import { ListEmpty } from '@components/ListEmpty';
 import { Button } from '@components/Button';
-import { useNavigation } from '@react-navigation/native';
+import { useFocusEffect, useNavigation } from '@react-navigation/native';
+import { groupsGetAll } from '@storage/group/groupsGetAll';
 
 export function Groups() {
     const [groups, setGroups] = useState<string[]>([]);
@@ -16,6 +17,23 @@ export function Groups() {
         navigation.navigate('new');
     }
 
+    async function fetchGroups() {
+        try {
+            const data = await groupsGetAll();
+            setGroups(data)
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    function handleOpenGroup(group: string) {
+        navigation.navigate('players', { group })
+    }
+    
+    useFocusEffect(useCallback(() => {
+        fetchGroups()
+    }, []))
+    
     return (
         <Styles.Container>
             <Header />
@@ -28,7 +46,7 @@ export function Groups() {
                 data={groups}
                 keyExtractor={item => item}
                 renderItem={({ item }) => (
-                    <GroupCard title={item} />
+                    <GroupCard title={item} onPress={() => handleOpenGroup(item)} />
                 )}
                 contentContainerStyle={!groups.length && { flex: 1 }}
                 ListEmptyComponent={() => (
