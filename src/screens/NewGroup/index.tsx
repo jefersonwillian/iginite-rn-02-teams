@@ -1,17 +1,16 @@
-import { useState } from "react";
 import { useNavigation } from "@react-navigation/native";
+import { useState } from "react";
 import { Alert } from "react-native";
-
-// import { AppError } from "@utils/AppError";
-// import { groupCreate } from "@storage/group/groupCreate";
 
 import Styles from "./styles";
 
-import { Header } from "@components/Header";
 import { Button } from "@components/Button";
+import { Header } from "@components/Header";
 import { Highlight } from "@components/Highlight";
 import { Input } from "@components/Input";
+
 import { groupCreate } from "@storage/group/groupCreate";
+
 import { AppError } from "@utils/AppError";
 
 export function NewGroup() {
@@ -25,7 +24,7 @@ export function NewGroup() {
             if (group.trim().length === 0) {
                 return Alert.alert('Novo Grupo', 'Informe o nome da turma.');
             }
-            
+
             await groupCreate(group);
             navigation.navigate('players', { group })
         } catch (error) {
